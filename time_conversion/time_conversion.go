@@ -3,15 +3,11 @@ package main
 import (
 	"bufio"
 	"fmt"
-	"io"
-	"os"
+	. "github.com/jcfrperu/go-competitive-programming"
 	"strconv"
 	"strings"
 )
 
-/*
- * Complete the timeConversion function below.
- */
 func timeConversion(s string) string {
 
 	split := strings.Split(s, ":")
@@ -32,38 +28,15 @@ func timeConversion(s string) string {
 	return result
 }
 
+func solution(lines []string, writer *bufio.Writer) {
+
+	Out(writer, fmt.Sprintf("%d", 4))
+}
+
 func main() {
-	//reader := bufio.NewReaderSize(strings.NewReader("12:05:39AM"), 1024 * 1024)
-	reader := bufio.NewReaderSize(os.Stdin, 1024*1024)
-
-	outputFile, err := os.Create(os.Getenv("OUTPUT_PATH"))
-	//outputFile, err := os.Stdout, error(nil)
-	checkError(err)
-
-	defer outputFile.Close()
-
-	writer := bufio.NewWriterSize(outputFile, 1024*1024)
-
-	s := readLine(reader)
-
-	result := timeConversion(s)
-
-	fmt.Fprintf(writer, "%s\n", result)
-
-	writer.Flush()
+	//RunWithFile(solution, "PROBLEM/testcases/001.input")
+	RunWithString(solution, "1\n2 3")
 }
 
-func readLine(reader *bufio.Reader) string {
-	str, _, err := reader.ReadLine()
-	if err == io.EOF {
-		return ""
-	}
-
-	return strings.TrimRight(string(str), "\r\n")
-}
-
-func checkError(err error) {
-	if err != nil {
-		panic(err)
-	}
-}
+// https://www.hackerrank.com/challenges/URL_PROBLEM/problem
+// NOTE: read 'template-submit-code.go' file to submit your code to hackerrank.com

@@ -3,10 +3,7 @@ package main
 import (
 	"bufio"
 	"fmt"
-	"io"
-	"os"
-	"strconv"
-	"strings"
+	. "github.com/jcfrperu/go-competitive-programming"
 )
 
 // Complete the dayOfProgrammer function below.
@@ -45,40 +42,15 @@ func dayOfProgrammer(year int) string {
 	return fmt.Sprintf("%02d.%02d.%d", day, month, year)
 }
 
+func solution(lines []string, writer *bufio.Writer) {
+
+	Out(writer, fmt.Sprintf("%d", 4))
+}
+
 func main() {
-	//reader := bufio.NewReaderSize(strings.NewReader("1918"), 16*1024*1024)
-	reader := bufio.NewReaderSize(os.Stdin, 16*1024*1024)
-
-	//stdout, err := os.Stdout, error(nil)
-	stdout, err := os.Create(os.Getenv("OUTPUT_PATH"))
-	checkError(err)
-
-	defer stdout.Close()
-
-	writer := bufio.NewWriterSize(stdout, 16*1024*1024)
-
-	yearTemp, err := strconv.ParseInt(strings.TrimSpace(readLine(reader)), 10, 64)
-	checkError(err)
-	year := int(yearTemp)
-
-	result := dayOfProgrammer(year)
-
-	fmt.Fprintf(writer, "%s\n", result)
-
-	writer.Flush()
+	//RunWithFile(solution, "PROBLEM/testcases/001.input")
+	RunWithString(solution, "1\n2 3")
 }
 
-func readLine(reader *bufio.Reader) string {
-	str, _, err := reader.ReadLine()
-	if err == io.EOF {
-		return ""
-	}
-
-	return strings.TrimRight(string(str), "\r\n")
-}
-
-func checkError(err error) {
-	if err != nil {
-		panic(err)
-	}
-}
+// https://www.hackerrank.com/challenges/URL_PROBLEM/problem
+// NOTE: read 'template-submit-code.go' file to submit your code to hackerrank.com

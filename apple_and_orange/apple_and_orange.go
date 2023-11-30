@@ -3,102 +3,43 @@ package main
 import (
 	"bufio"
 	"fmt"
-	"io"
-	"os"
-	"strconv"
-	"strings"
+	. "github.com/jcfrperu/go-competitive-programming"
 )
 
-// Complete the countApplesAndOranges function below.
-func countApplesAndOranges(s int, t int, a int, b int, apples []int, oranges []int) {
+func solution(lines []string, writer *bufio.Writer) {
+	// first line
+	var s = SplitIntsGetAt(lines[0], " ", 0)
+	var t = SplitIntsGetAt(lines[0], " ", 1)
+	// second line
+	var a = SplitIntsGetAt(lines[1], " ", 0)
+	var b = SplitIntsGetAt(lines[1], " ", 1)
+	// third line is ignored
+	// fourth line
+	var apples = SplitInts(lines[3], " ")
+	var oranges = SplitInts(lines[4], " ")
 
-	var numberApples = 0
-	var numberOranges = 0
+	var applesNumber int64 = 0
+	var orangesNumber int64 = 0
 
 	for _, da := range apples {
 		if a+da >= s && a+da <= t {
-			numberApples++
+			applesNumber++
 		}
 	}
 
 	for _, db := range oranges {
 		if b+db <= t && b+db >= s {
-			numberOranges++
+			orangesNumber++
 		}
 	}
 
-	fmt.Printf("%d\n%d", numberApples, numberOranges)
+	Out(writer, fmt.Sprintf("%d\n%d", applesNumber, orangesNumber))
 }
 
 func main() {
-	reader := bufio.NewReaderSize(os.Stdin, 1024*1024)
-
-	st := strings.Split(readLine(reader), " ")
-
-	sTemp, err := strconv.ParseInt(st[0], 10, 64)
-	checkError(err)
-	s := int(sTemp)
-
-	tTemp, err := strconv.ParseInt(st[1], 10, 64)
-	checkError(err)
-	t := int(tTemp)
-
-	ab := strings.Split(readLine(reader), " ")
-
-	aTemp, err := strconv.ParseInt(ab[0], 10, 64)
-	checkError(err)
-	a := int(aTemp)
-
-	bTemp, err := strconv.ParseInt(ab[1], 10, 64)
-	checkError(err)
-	b := int(bTemp)
-
-	mn := strings.Split(readLine(reader), " ")
-
-	mTemp, err := strconv.ParseInt(mn[0], 10, 64)
-	checkError(err)
-	m := int(mTemp)
-
-	nTemp, err := strconv.ParseInt(mn[1], 10, 64)
-	checkError(err)
-	n := int(nTemp)
-
-	applesTemp := strings.Split(readLine(reader), " ")
-
-	var apples []int
-
-	for i := 0; i < int(m); i++ {
-		applesItemTemp, err := strconv.ParseInt(applesTemp[i], 10, 64)
-		checkError(err)
-		applesItem := int(applesItemTemp)
-		apples = append(apples, applesItem)
-	}
-
-	orangesTemp := strings.Split(readLine(reader), " ")
-
-	var oranges []int
-
-	for i := 0; i < int(n); i++ {
-		orangesItemTemp, err := strconv.ParseInt(orangesTemp[i], 10, 64)
-		checkError(err)
-		orangesItem := int(orangesItemTemp)
-		oranges = append(oranges, orangesItem)
-	}
-
-	countApplesAndOranges(s, t, a, b, apples, oranges)
+	//RunWithFile(solution, "apple_and_orange/testcases/003.input")
+	RunWithString(solution, "7 11\n5 15\n3 2\n-2 2 1\n5 -6")
 }
 
-func readLine(reader *bufio.Reader) string {
-	str, _, err := reader.ReadLine()
-	if err == io.EOF {
-		return ""
-	}
-
-	return strings.TrimRight(string(str), "\r\n")
-}
-
-func checkError(err error) {
-	if err != nil {
-		panic(err)
-	}
-}
+// https://www.hackerrank.com/challenges/apple-and-orange/problem
+// NOTE: read 'template-submit-code.go' file to submit your code to hackerrank.com

@@ -3,10 +3,7 @@ package main
 import (
 	"bufio"
 	"fmt"
-	"io"
-	"os"
-	"strconv"
-	"strings"
+	. "github.com/jcfrperu/go-competitive-programming"
 )
 
 // Complete the larrysArray function below.
@@ -73,57 +70,15 @@ func sePuedeIterar(a []int) bool {
 	return false
 }
 
+func solution(lines []string, writer *bufio.Writer) {
+
+	Out(writer, fmt.Sprintf("%d", 4))
+}
+
 func main() {
-	//reader := bufio.NewReaderSize(strings.NewReader("3\n3\n3 1 2\n4\n1 3 4 2\n5\n1 2 3 5 4"), 1024*1024)
-	reader := bufio.NewReaderSize(os.Stdin, 1024*1024)
-
-	stdout, err := os.Create(os.Getenv("OUTPUT_PATH"))
-	//stdout, err := os.Stdout, error(nil)
-	checkError(err)
-
-	defer stdout.Close()
-
-	writer := bufio.NewWriterSize(stdout, 1024*1024)
-
-	tTemp, err := strconv.ParseInt(readLine(reader), 10, 64)
-	checkError(err)
-	t := int(tTemp)
-
-	for tItr := 0; tItr < int(t); tItr++ {
-		nTemp, err := strconv.ParseInt(readLine(reader), 10, 64)
-		checkError(err)
-		n := int(nTemp)
-
-		ATemp := strings.Split(readLine(reader), " ")
-
-		var A []int
-
-		for i := 0; i < int(n); i++ {
-			AItemTemp, err := strconv.ParseInt(ATemp[i], 10, 64)
-			checkError(err)
-			AItem := int(AItemTemp)
-			A = append(A, AItem)
-		}
-
-		result := larrysArray(A)
-
-		fmt.Fprintf(writer, "%s\n", result)
-	}
-
-	writer.Flush()
+	//RunWithFile(solution, "PROBLEM/testcases/001.input")
+	RunWithString(solution, "1\n2 3")
 }
 
-func readLine(reader *bufio.Reader) string {
-	str, _, err := reader.ReadLine()
-	if err == io.EOF {
-		return ""
-	}
-
-	return strings.TrimRight(string(str), "\r\n")
-}
-
-func checkError(err error) {
-	if err != nil {
-		panic(err)
-	}
-}
+// https://www.hackerrank.com/challenges/URL_PROBLEM/problem
+// NOTE: read 'template-submit-code.go' file to submit your code to hackerrank.com

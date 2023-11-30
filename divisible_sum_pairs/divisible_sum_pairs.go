@@ -3,13 +3,9 @@ package main
 import (
 	"bufio"
 	"fmt"
-	"io"
-	"os"
-	"strconv"
-	"strings"
+	. "github.com/jcfrperu/go-competitive-programming"
 )
 
-// Complete the divisibleSumPairs function below.
 func divisibleSumPairs(n int32, k int32, ar []int32) int32 {
 	var result int32 = 0
 
@@ -24,55 +20,15 @@ func divisibleSumPairs(n int32, k int32, ar []int32) int32 {
 	return result
 }
 
+func solution(lines []string, writer *bufio.Writer) {
+
+	Out(writer, fmt.Sprintf("%d", 4))
+}
+
 func main() {
-	reader := bufio.NewReaderSize(os.Stdin, 1024*1024)
-
-	stdout, err := os.Create(os.Getenv("OUTPUT_PATH"))
-	checkError(err)
-
-	defer stdout.Close()
-
-	writer := bufio.NewWriterSize(stdout, 1024*1024)
-
-	nk := strings.Split(readLine(reader), " ")
-
-	nTemp, err := strconv.ParseInt(nk[0], 10, 64)
-	checkError(err)
-	n := int32(nTemp)
-
-	kTemp, err := strconv.ParseInt(nk[1], 10, 64)
-	checkError(err)
-	k := int32(kTemp)
-
-	arTemp := strings.Split(readLine(reader), " ")
-
-	var ar []int32
-
-	for i := 0; i < int(n); i++ {
-		arItemTemp, err := strconv.ParseInt(arTemp[i], 10, 64)
-		checkError(err)
-		arItem := int32(arItemTemp)
-		ar = append(ar, arItem)
-	}
-
-	result := divisibleSumPairs(n, k, ar)
-
-	fmt.Fprintf(writer, "%d\n", result)
-
-	writer.Flush()
+	//RunWithFile(solution, "PROBLEM/testcases/001.input")
+	RunWithString(solution, "1\n2 3")
 }
 
-func readLine(reader *bufio.Reader) string {
-	str, _, err := reader.ReadLine()
-	if err == io.EOF {
-		return ""
-	}
-
-	return strings.TrimRight(string(str), "\r\n")
-}
-
-func checkError(err error) {
-	if err != nil {
-		panic(err)
-	}
-}
+// https://www.hackerrank.com/challenges/URL_PROBLEM/problem
+// NOTE: read 'template-submit-code.go' file to submit your code to hackerrank.com

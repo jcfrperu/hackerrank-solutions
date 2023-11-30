@@ -3,11 +3,8 @@ package main
 import (
 	"bufio"
 	"fmt"
-	"io"
+	. "github.com/jcfrperu/go-competitive-programming"
 	"math/big"
-	"os"
-	"strconv"
-	"strings"
 )
 
 // Complete the extraLongFactorials function below.
@@ -29,28 +26,15 @@ func extraLongFactorials(n int64) {
 	fmt.Printf("%d", fact)
 }
 
+func solution(lines []string, writer *bufio.Writer) {
+
+	Out(writer, fmt.Sprintf("%d", 4))
+}
+
 func main() {
-	//reader := bufio.NewReaderSize(strings.NewReader("25"), 1024*1024)
-	reader := bufio.NewReaderSize(os.Stdin, 1024*1024)
-
-	nTemp, err := strconv.ParseInt(readLine(reader), 10, 64)
-	checkError(err)
-	n := nTemp
-
-	extraLongFactorials(n)
+	//RunWithFile(solution, "PROBLEM/testcases/001.input")
+	RunWithString(solution, "1\n2 3")
 }
 
-func readLine(reader *bufio.Reader) string {
-	str, _, err := reader.ReadLine()
-	if err == io.EOF {
-		return ""
-	}
-
-	return strings.TrimRight(string(str), "\r\n")
-}
-
-func checkError(err error) {
-	if err != nil {
-		panic(err)
-	}
-}
+// https://www.hackerrank.com/challenges/URL_PROBLEM/problem
+// NOTE: read 'template-submit-code.go' file to submit your code to hackerrank.com

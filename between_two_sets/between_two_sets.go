@@ -3,11 +3,8 @@ package main
 import (
 	"bufio"
 	"fmt"
-	"io"
-	"os"
+	. "github.com/jcfrperu/go-competitive-programming"
 	"sort"
-	"strconv"
-	"strings"
 )
 
 func getTotalX(as []int, bs []int) int {
@@ -76,68 +73,15 @@ func getTotalX(as []int, bs []int) int {
 	return len(cantidatosC2)
 }
 
+func solution(lines []string, writer *bufio.Writer) {
+
+	Out(writer, fmt.Sprintf("%d", 4))
+}
+
 func main() {
-	//reader := bufio.NewReaderSize(strings.NewReader("2 2\n3 4\n24 48"), 16*1024*1024)
-	reader := bufio.NewReaderSize(os.Stdin, 16*1024*1024)
-
-	//stdout, err := os.Stdout, error(nil)
-	stdout, err := os.Create(os.Getenv("OUTPUT_PATH"))
-	checkError(err)
-
-	defer stdout.Close()
-
-	writer := bufio.NewWriterSize(stdout, 16*1024*1024)
-
-	firstMultipleInput := strings.Split(strings.TrimSpace(readLine(reader)), " ")
-
-	nTemp, err := strconv.ParseInt(firstMultipleInput[0], 10, 64)
-	checkError(err)
-	n := int(nTemp)
-
-	mTemp, err := strconv.ParseInt(firstMultipleInput[1], 10, 64)
-	checkError(err)
-	m := int(mTemp)
-
-	arrTemp := strings.Split(strings.TrimSpace(readLine(reader)), " ")
-
-	var arr []int
-
-	for i := 0; i < int(n); i++ {
-		arrItemTemp, err := strconv.ParseInt(arrTemp[i], 10, 64)
-		checkError(err)
-		arrItem := int(arrItemTemp)
-		arr = append(arr, arrItem)
-	}
-
-	brrTemp := strings.Split(strings.TrimSpace(readLine(reader)), " ")
-
-	var brr []int
-
-	for i := 0; i < int(m); i++ {
-		brrItemTemp, err := strconv.ParseInt(brrTemp[i], 10, 64)
-		checkError(err)
-		brrItem := int(brrItemTemp)
-		brr = append(brr, brrItem)
-	}
-
-	total := getTotalX(arr, brr)
-
-	fmt.Fprintf(writer, "%d\n", total)
-
-	writer.Flush()
+	//RunWithFile(solution, "PROBLEM/testcases/001.input")
+	RunWithString(solution, "1\n2 3")
 }
 
-func readLine(reader *bufio.Reader) string {
-	str, _, err := reader.ReadLine()
-	if err == io.EOF {
-		return ""
-	}
-
-	return strings.TrimRight(string(str), "\r\n")
-}
-
-func checkError(err error) {
-	if err != nil {
-		panic(err)
-	}
-}
+// https://www.hackerrank.com/challenges/URL_PROBLEM/problem
+// NOTE: read 'template-submit-code.go' file to submit your code to hackerrank.com
