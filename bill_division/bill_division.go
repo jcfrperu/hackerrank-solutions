@@ -10,7 +10,7 @@ import (
 /* **************************   SOLUTION   ************************** */
 /* ****************************************************************** */
 func solution(lines []string, writer *bufio.Writer) {
-	k := SplitIntsGetAt(lines[0], " ", 1)
+	k := SplitGetIntAt(lines[0], " ", 1)
 	bill := SplitInts(lines[1], " ")
 	bCharged := ParseInt(lines[2])
 
@@ -26,16 +26,16 @@ func solution(lines []string, writer *bufio.Writer) {
 	result := bCharged - bActual
 
 	if result == 0 {
-		Out(writer, fmt.Sprintf("Bon Appetit"))
+		fmt.Fprintf(writer, "Bon Appetit")
 	} else {
-		Out(writer, fmt.Sprintf("%d", result))
+		fmt.Fprintf(writer, "%d", result)
 	}
 }
 
 func main() {
-	//RunWithFile(solution, "bill_division/testcases/001.input")
-	RunWithString(solution, "7 11\n5 15\n3 2\n-2 2 1\n5 -6")
+	//RunWithFile(solution, "bill_division/testcases/001-in.txt")
+	RunWithString(solution, "4 1\n3 10 2 9\n12")
 }
 
-// https://www.hackerrank.com/challenges/apple-and-orange/problem
+// https://www.hackerrank.com/challenges/bon-appetit/problem
 // NOTE: read 'template-submit-code.go' file to submit your code to hackerrank.com
