@@ -16,13 +16,13 @@ func solution(lines []string, writer *bufio.Writer) {
 	if n%2 == 0 && p%2 != 0 {
 		turnsRight += 1
 	}
-	var turns = MinInt(turnsLeft, turnsRight)
+	var turns = min(turnsLeft, turnsRight)
 
-	Out(writer, fmt.Sprintf("%d", turns))
+	fmt.Fprintf(writer, "%d", turns)
 }
 
 func main() {
-	//RunWithFile(solution, "drawing_book/testcases/002.input")
+	//RunWithFile(solution, "drawing_book/testcases/002-in.txt")
 	RunWithString(solution, "4\n4")
 }
 
