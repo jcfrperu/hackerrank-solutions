@@ -6,30 +6,33 @@ import (
 	. "github.com/jcfrperu/go-competitive-programming"
 )
 
-// Complete the larrysArray function below.
-func larrysArray(A []int) string {
+func solution(lines []string, writer *bufio.Writer) {
+	n := ParseInt(lines[0])
 
-	i := 0
-	for sePuedeIterar(A) && !estaOrdenado(A) {
-		if seDebeRotar(A, i) {
-			rotar(A, i)
-		} else {
-			i++
-			if i > len(A)-3 {
-				i = 0
+	for iter := 1; iter <= n; iter++ {
+		A := SplitInts(lines[iter*2], " ")
+
+		i := 0
+		for canBeIterated(A) && !isSorted(A) {
+			if mustBeRotate(A, i) {
+				rotate(A, i)
+			} else {
+				i++
+				if i > len(A)-3 {
+					i = 0
+				}
 			}
 		}
-	}
 
-	if estaOrdenado(A) {
-		return "YES"
+		if isSorted(A) {
+			fmt.Fprintf(writer, "YES\n")
+		} else {
+			fmt.Fprintf(writer, "NO\n")
+		}
 	}
-
-	return "NO"
 }
 
-func rotar(a []int, i int) {
-
+func rotate(a []int, i int) {
 	if i >= 0 && i <= len(a)-3 {
 		temp := a[i]
 		a[i] = a[i+1]
@@ -38,47 +41,36 @@ func rotar(a []int, i int) {
 	}
 }
 
-func seDebeRotar(a []int, i int) bool {
-
+func mustBeRotate(a []int, i int) bool {
 	if i >= 0 && i <= len(a)-3 {
 		return a[i] > a[i+1] || a[i] > a[i+2]
 	}
-
 	return false
 }
 
-func estaOrdenado(a []int) bool {
-
-	// ordenado ascendente, como los elementos van de 1 en 1 también podría usar otro criterio
+func isSorted(a []int) bool {
+	// sorted from lowest to highest
 	for i := 0; i < len(a)-1; i++ {
 		if a[i] > a[i+1] {
 			return false
 		}
 	}
-
 	return true
 }
 
-func sePuedeIterar(a []int) bool {
-
+func canBeIterated(a []int) bool {
 	for i := 0; i <= len(a)-3; i++ {
-		if seDebeRotar(a, i) {
+		if mustBeRotate(a, i) {
 			return true
 		}
 	}
-
 	return false
 }
 
-func solution(lines []string, writer *bufio.Writer) {
-
-	Out(writer, fmt.Sprintf("%d", 4))
-}
-
 func main() {
-	//RunWithFile(solution, "PROBLEM/testcases/001.input")
-	RunWithString(solution, "1\n2 3")
+	//RunWithFile(solution, "larrys_array/testcases/001-in.txt")
+	RunWithString(solution, "3\n3\n3 1 2\n4\n1 3 4 2\n5\n1 2 3 5 4")
 }
 
-// https://www.hackerrank.com/challenges/URL_PROBLEM/problem
+// https://www.hackerrank.com/challenges/larrys-array/problem
 // NOTE: read 'template-submit-code.go' file to submit your code to hackerrank.com
