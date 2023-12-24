@@ -6,9 +6,8 @@ import (
 	. "github.com/jcfrperu/go-competitive-programming"
 )
 
-// Complete the plusMinus function below.
-func plusMinus(arr []int32) {
-
+func solution(lines []string, writer *bufio.Writer) {
+	arr := SplitInts(lines[1], " ")
 	size := float64(len(arr))
 
 	positives := float64(0)
@@ -25,20 +24,15 @@ func plusMinus(arr []int32) {
 		}
 	}
 
-	fmt.Printf("%.6f\n", positives/size)
-	fmt.Printf("%.6f\n", negatives/size)
-	fmt.Printf("%.6f\n", zeros/size)
-}
-
-func solution(lines []string, writer *bufio.Writer) {
-
-	Out(writer, fmt.Sprintf("%d", 4))
+	fmt.Fprintf(writer, "%.6f\n", positives/size)
+	fmt.Fprintf(writer, "%.6f\n", negatives/size)
+	fmt.Fprintf(writer, "%.6f\n", zeros/size)
 }
 
 func main() {
-	//RunWithFile(solution, "PROBLEM/testcases/001.input")
-	RunWithString(solution, "1\n2 3")
+	RunWithFile(solution, "plus_minus/testcases/001-in.txt")
+	//RunWithString(solution, "6\n-4 3 -9 0 4 1")
 }
 
-// https://www.hackerrank.com/challenges/URL_PROBLEM/problem
+// https://www.hackerrank.com/challenges/plus-minus/problem
 // NOTE: read 'template-submit-code.go' file to submit your code to hackerrank.com
