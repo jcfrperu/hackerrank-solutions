@@ -21,7 +21,7 @@ func solution(lines []string, writer *bufio.Writer) {
 	}
 
 	// option 02 using Frequencies method from library
-	// freqMap, _, _, maxIndex := Frequencies(heights)
+	// freqMap, _, _, maxIndex := Freq(heights, false)
 	// maxVal := heights[maxIndex]
 
 	result := freqMap[maxVal]

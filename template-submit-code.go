@@ -1,3 +1,4 @@
+// ******************************************************************************/
 // *   hackerrank.com DOES NOT SUPPORT TO IMPORT CODE FROM GITHUB (YET).        */
 // *   TO SUBMIT YOUR CODE YOU WILL NEED:                                       */
 // *   1. include all functions in this template file (copy whole file)         */
@@ -139,7 +140,7 @@ func SplitGetLongAt(line string, separator string, index int) int64 {
 	return ParseLong(split[index])
 }
 
-func Frequencies[T int | int64 | float64 | string](list []T) (map[T]int, []T, int, int) {
+func Freq[T int | int64 | float64 | string](list []T, sortByFreq bool) (map[T]int, []T, int, int) {
 	// creating map of frequencies and find indexes for max and min values
 	minIndex, maxIndex := 0, 0
 	frequencies := make(map[T]int, len(list))
@@ -157,10 +158,19 @@ func Frequencies[T int | int64 | float64 | string](list []T) (map[T]int, []T, in
 	for key := range frequencies {
 		items = append(items, key)
 	}
-	// sort list of items by frequency (highest to lowest)
-	sort.Slice(items, func(i, j int) bool {
-		return frequencies[items[i]] > frequencies[items[j]]
-	})
+
+	if sortByFreq {
+		// sort list of items by frequency (highest to lowest)
+		sort.Slice(items, func(i, j int) bool {
+			return frequencies[items[i]] > frequencies[items[j]]
+		})
+	} else {
+		// natural sorting (lowest to highest)
+		sort.Slice(items, func(i, j int) bool {
+			return items[i] < items[j]
+		})
+	}
+
 	return frequencies, items, minIndex, maxIndex
 }
 

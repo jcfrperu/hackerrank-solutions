@@ -9,7 +9,7 @@ import (
 func solution(lines []string, writer *bufio.Writer) {
 	var list = SplitInts(lines[1], " ")
 
-	freqMap, _, _, _ := Frequencies(list)
+	freqMap, _, _, _ := Freq(list, false)
 
 	// or
 	//freqMap := make(map[int]int, len(list))

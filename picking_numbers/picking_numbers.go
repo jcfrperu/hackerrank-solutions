@@ -7,46 +7,41 @@ import (
 )
 
 func solution(lines []string, writer *bufio.Writer) {
-
 	list := SplitInts(lines[1], " ")
-	slist, freqMap := FrequenciesInt(list)
-
-	// out(writer, fmt.Sprintf("%v\n", list))
-	// out(writer, fmt.Sprintf("%v\n", freqMap))
-	// out(writer, fmt.Sprintf("%v\n", slist))
+	freqMap, sList, _, _ := Freq(list, false)
 
 	// solution
 	var counter int
 	maxCounter := 0
-	for i := 0; i < len(slist)-1; i++ {
-		// diferences = 0
-		counter = freqMap[slist[i]]
+	for i := 0; i < len(sList)-1; i++ {
+		// differences = 0
+		counter = freqMap[sList[i]]
 		if counter > maxCounter {
 			maxCounter = counter
 		}
-		// diferences = 1
-		if slist[i+1]-slist[i] <= 1 {
-			counter = freqMap[slist[i]] + freqMap[slist[i+1]]
+		// differences = 1
+		if sList[i+1]-sList[i] <= 1 {
+			counter = freqMap[sList[i]] + freqMap[sList[i+1]]
 			if counter > maxCounter {
 				maxCounter = counter
 			}
 		}
 	}
 
-	// diferences = 0 (last item)
-	lastIndex := len(slist) - 1
-	counter = freqMap[slist[lastIndex]]
+	// differences = 0 (last item)
+	lastIndex := len(sList) - 1
+	counter = freqMap[sList[lastIndex]]
 	if counter > maxCounter {
 		maxCounter = counter
 	}
 
-	Out(writer, fmt.Sprintf("%d", maxCounter))
+	fmt.Fprintf(writer, "%d", maxCounter)
 }
 
 func main() {
-	//RunWithFile(solution, "PROBLEM/testcases/001.input")
-	RunWithString(solution, "1\n2 3")
+	RunWithFile(solution, "picking_numbers/testcases/001-in.txt")
+	//RunWithString(solution, "6\n4 6 5 3 3 1")
 }
 
-// https://www.hackerrank.com/challenges/URL_PROBLEM/problem
+// https://www.hackerrank.com/challenges/picking-numbers/problem
 // NOTE: read 'template-submit-code.go' file to submit your code to hackerrank.com
