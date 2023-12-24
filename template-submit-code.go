@@ -1,6 +1,6 @@
 // *   hackerrank.com DOES NOT SUPPORT TO IMPORT CODE FROM GITHUB (YET).        */
 // *   TO SUBMIT YOUR CODE YOU WILL NEED:                                       */
-// *   1. INCLUDE all functions in this template file (copy whole file)         */
+// *   1. include all functions in this template file (copy whole file)         */
 // *   2. include your solution() method + methods related to your solution     */
 // ******************************************************************************/
 package main
@@ -20,6 +20,7 @@ import (
 /*******************************************************************************/
 func solution(lines []string, writer *bufio.Writer) {
 	//TODO: put your code here
+	fmt.Fprintf(writer, "%d", 0)
 }
 
 func main() {
@@ -79,26 +80,20 @@ func CheckError(err error) {
 	}
 }
 
+func Trim(s string) string {
+	return strings.TrimSpace(s)
+}
+
 func ParseInt(s string) int {
-	value, err := strconv.ParseInt(s, 10, 32)
+	value, err := strconv.ParseInt(Trim(s), 10, 32)
 	CheckError(err)
 	return int(value)
 }
 
-func Out(writer *bufio.Writer, data string) {
-	PrintOut(writer, data, true, true)
-}
-
-func PrintOut(writer *bufio.Writer, data string, trimLeft bool, trimRight bool) {
-	dataToPrint := data
-	if trimLeft {
-		dataToPrint = strings.TrimLeft(dataToPrint, " ")
-	}
-	if trimRight {
-		dataToPrint = strings.TrimRight(dataToPrint, " ")
-	}
-	_, err := fmt.Fprintf(writer, dataToPrint)
+func ParseLong(s string) int64 {
+	value, err := strconv.ParseInt(Trim(s), 10, 64)
 	CheckError(err)
+	return value
 }
 
 func Split(line string, separator string) []string {
@@ -108,72 +103,61 @@ func Split(line string, separator string) []string {
 func SplitInts(line string, separator string) []int {
 	items := Split(line, separator)
 	list := make([]int, 0, len(items))
-	for _, item := range items {
-		list = append(list, ParseInt(item))
+	for i := range items {
+		item := Trim(items[i])
+		if item != "" {
+			list = append(list, ParseInt(item))
+		}
 	}
 	return list
 }
 
-func GetSplitInt(line string, separator string, part int) int {
-	split := Split(line, separator)
-	return ParseInt(split[part])
+func SplitLongs(line string, separator string) []int64 {
+	items := Split(line, separator)
+	list := make([]int64, 0, len(items))
+	for i := range items {
+		item := Trim(items[i])
+		if item != "" {
+			list = append(list, ParseLong(item))
+		}
+	}
+	return list
 }
 
-func FrequenciesInt(list []int) ([]int, map[int]int) {
+func Frequencies(list []string, sortKeysByFreq bool) (map[string]int, []string) {
 	// creating map of frequencies
-	freqMap := make(map[int]int, len(list))
-	for _, item := range list {
-		freqMap[item] += 1
+	freqMap := make(map[string]int, len(list))
+	for i := range list {
+		freqMap[list[i]]++
 	}
 	// sorted list of items without repetition
-	sortedItems := make([]int, 0, len(freqMap))
-	for key, _ := range freqMap {
-		sortedItems = append(sortedItems, key)
+	keys := make([]string, 0, len(freqMap))
+	for key := range freqMap {
+		keys = append(keys, key)
 	}
-	sort.Ints(sortedItems)
-	return sortedItems, freqMap
+	if sortKeysByFreq {
+		sort.Slice(keys, func(i, j int) bool {
+			return freqMap[keys[i]] > freqMap[keys[j]]
+		})
+	}
+	return freqMap, keys
 }
 
-func ExecInt(operation string, list ...int) int {
-	if operation == "min" {
-		min := list[0]
-		for _, item := range list {
-			if item < min {
-				min = item
-			}
-		}
-		return min
+func FrequenciesInt(list []int, sortKeysByFreq bool) (map[int]int, []int) {
+	// creating map of frequencies
+	freqMap := make(map[int]int, len(list))
+	for i := range list {
+		freqMap[list[i]]++
 	}
-	if operation == "max" {
-		max := list[0]
-		for _, item := range list {
-			if item > max {
-				max = item
-			}
-		}
-		return max
+	// sorted list of items without repetition
+	keys := make([]int, 0, len(freqMap))
+	for key := range freqMap {
+		keys = append(keys, key)
 	}
-	panic("operation not supported")
-}
-
-func ExecIntList(operation string, list []int) int {
-	if operation == "min" {
-		min := list[0]
-		for _, item := range list {
-			if item < min {
-				min = item
-			}
-		}
-		return min
+	if sortKeysByFreq {
+		sort.Slice(keys, func(i, j int) bool {
+			return freqMap[keys[i]] > freqMap[keys[j]]
+		})
 	}
-	if operation == "max" {
-		max := list[0]
-		for _, item := range list {
-			if item > max {
-				max = item
-			}
-		}
-		return max
-	}
-	panic("operation not supported")
+	return freqMap, keys
 }
