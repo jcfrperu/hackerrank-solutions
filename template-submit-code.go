@@ -139,40 +139,45 @@ func SplitGetLongAt(line string, separator string, index int) int64 {
 	return ParseLong(split[index])
 }
 
-func Frequencies(list []string, sortKeysByFreq bool) (map[string]int, []string) {
-	// creating map of frequencies
-	freqMap := make(map[string]int, len(list))
+func Frequencies[T int | int64 | float64 | string](list []T) (map[T]int, []T, int, int) {
+	// creating map of frequencies and find indexes for max and min values
+	minIndex, maxIndex := 0, 0
+	frequencies := make(map[T]int, len(list))
 	for i := range list {
-		freqMap[list[i]]++
+		frequencies[list[i]]++
+		if list[i] < list[minIndex] {
+			minIndex = i
+		}
+		if list[i] > list[maxIndex] {
+			maxIndex = i
+		}
 	}
-	// sorted list of items without repetition
-	keys := make([]string, 0, len(freqMap))
-	for key := range freqMap {
-		keys = append(keys, key)
+	// list of items without repetition
+	items := make([]T, 0, len(frequencies))
+	for key := range frequencies {
+		items = append(items, key)
 	}
-	if sortKeysByFreq {
-		sort.Slice(keys, func(i, j int) bool {
-			return freqMap[keys[i]] > freqMap[keys[j]]
-		})
-	}
-	return freqMap, keys
+	// sort list of items by frequency (highest to lowest)
+	sort.Slice(items, func(i, j int) bool {
+		return frequencies[items[i]] > frequencies[items[j]]
+	})
+	return frequencies, items, minIndex, maxIndex
 }
 
-func FrequenciesInt(list []int, sortKeysByFreq bool) (map[int]int, []int) {
-	// creating map of frequencies
-	freqMap := make(map[int]int, len(list))
+func Find[T int | int64 | float64 | string](list []T, value T) int {
 	for i := range list {
-		freqMap[list[i]]++
+		if list[i] == value {
+			return i
+		}
 	}
-	// sorted list of items without repetition
-	keys := make([]int, 0, len(freqMap))
-	for key := range freqMap {
-		keys = append(keys, key)
+	return -1
+}
+
+func FindLast[T int | int64 | float64 | string](list []T, value T) int {
+	for i := len(list) - 1; i >= 0; i-- {
+		if list[i] == value {
+			return i
+		}
 	}
-	if sortKeysByFreq {
-		sort.Slice(keys, func(i, j int) bool {
-			return freqMap[keys[i]] > freqMap[keys[j]]
-		})
-	}
-	return freqMap, keys
+	return -1
 }

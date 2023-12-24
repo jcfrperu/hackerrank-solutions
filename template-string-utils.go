@@ -2,27 +2,10 @@ package main
 
 import (
 	"regexp"
-	"strconv"
 	"strings"
 	"unicode"
 	"unicode/utf8"
 )
-
-type IntegerNumber interface {
-	~int | ~int8 | ~int16 | ~int32 | ~int64 | ~uint | ~uint8 | ~uint16 | ~uint32 | ~uint64
-}
-
-type DecimalNumber interface {
-	~float32 | ~float64
-}
-
-func FormatInt[T IntegerNumber](i T) string {
-	return strconv.FormatInt(int64(i), 10)
-}
-
-func FormatDouble[T DecimalNumber](f T) string {
-	return strconv.FormatFloat(float64(f), 'f', -1, 64)
-}
 
 // thanks to and based on https://github.com/agrison/go-commons-lang
 
