@@ -4,7 +4,6 @@ import (
 	"bufio"
 	"fmt"
 	. "github.com/jcfrperu/go-competitive-programming"
-	"strconv"
 	"strings"
 )
 
@@ -13,9 +12,9 @@ func solution(lines []string, writer *bufio.Writer) {
 
 	split := strings.Split(s, ":")
 
-	hours, _ := strconv.Atoi(split[0])
-	minutes, _ := strconv.Atoi(split[1])
-	seconds, _ := strconv.Atoi(strings.ReplaceAll(strings.ReplaceAll(split[2], "AM", ""), "PM", ""))
+	hours := ParseInt(split[0])
+	minutes := ParseInt(split[1])
+	seconds := ParseInt(strings.ReplaceAll(strings.ReplaceAll(split[2], "AM", ""), "PM", ""))
 
 	if strings.Contains(split[2], "PM") && hours < 12 {
 		hours = hours + 12
@@ -27,8 +26,8 @@ func solution(lines []string, writer *bufio.Writer) {
 }
 
 func main() {
-	//RunWithFile(solution, "time_conversion/testcases/001-in.txt")
-	RunWithString(solution, "07:05:45PM")
+	RunWithFile(solution, "time_conversion/testcases/001-in.txt")
+	//RunWithString(solution, "07:05:45PM")
 }
 
 // https://www.hackerrank.com/challenges/time-conversion/problem
