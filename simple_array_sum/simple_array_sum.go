@@ -4,7 +4,6 @@ import (
 	"bufio"
 	"fmt"
 	. "github.com/jcfrperu/go-competitive-programming"
-	"io"
 )
 
 func solution(lines []string, writer *bufio.Writer) {
@@ -15,11 +14,7 @@ func solution(lines []string, writer *bufio.Writer) {
 		sum += list[i]
 	}
 
-	Print2(writer, "%d", sum)
-}
-
-func Print2(w io.Writer, format string, a any) {
-	fmt.Fprintf(w, format, a)
+	fmt.Fprintf(writer, "%d", sum)
 }
 
 func main() {
