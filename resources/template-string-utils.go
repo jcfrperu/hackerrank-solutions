@@ -1,4 +1,4 @@
-package main
+package other_templates
 
 import (
 	"regexp"

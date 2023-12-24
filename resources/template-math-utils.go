@@ -1,4 +1,4 @@
-package main
+package other_templates
 
 func GCD[T int | int64](a, b T) T {
 	for b != 0 {

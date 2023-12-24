@@ -6,49 +6,32 @@ import (
 	. "github.com/jcfrperu/go-competitive-programming"
 )
 
-// Complete the birthdayCakeCandles function below.
-func birthdayCakeCandles(ar []int32) int32 {
+func solution(lines []string, writer *bufio.Writer) {
+	heights := SplitInts(lines[1], " ")
+	freqMap := make(map[int]int, len(heights))
 
-	mapa := make(map[int32]int32, len(ar))
-
-	max := ar[0]
-
-	//fmt.Printf("arreglo=%+v\n", ar )
-	//fmt.Printf("mapa=%+v\n", mapa )
-
-	for _, number := range ar {
-
-		//fmt.Printf("item=%d\n", number)
-
-		// if exists
-		if mapa[number] != 0 {
-			//fmt.Printf("entrando al != en number=%d\n", mapa[number] )
-			mapa[number] += 1
-		} else { // if doesnot
-			mapa[number] = 1 // in go isnt necessary
+	maxVal := heights[0]
+	for _, number := range heights {
+		// counting freqMap
+		freqMap[number] += 1
+		// find maximum
+		if number > maxVal {
+			maxVal = number
 		}
-
-		if number > max {
-			max = number
-		}
-		//fmt.Printf("mapa=%+v\n", mapa )
 	}
 
-	//fmt.Printf("mapa final=%+v\n", mapa )
-	//fmt.Printf("max final=%d\n", max )
+	// option 02 using Frequencies method from library
+	// freqMap, _, _, maxIndex := Frequencies[int](heights)
+	// maxVal := heights[maxIndex]
 
-	return mapa[max]
-}
+	result := freqMap[maxVal]
 
-func solution(lines []string, writer *bufio.Writer) {
-
-	Out(writer, fmt.Sprintf("%d", 4))
+	fmt.Fprintf(writer, "%d", result)
 }
 
 func main() {
-	//RunWithFile(solution, "PROBLEM/testcases/001.input")
-	RunWithString(solution, "1\n2 3")
+	RunWithFile(solution, "birthday_cake_candles/testcases/001-in.txt") //RunWithString(solution, "4\n3 2 1 3")
 }
 
-// https://www.hackerrank.com/challenges/URL_PROBLEM/problem
+// https://www.hackerrank.com/challenges/birthday-cake-candles/problem
 // NOTE: read 'template-submit-code.go' file to submit your code to hackerrank.com
