@@ -21,7 +21,7 @@ func solution(lines []string, writer *bufio.Writer) {
 	}
 
 	// option 02 using Frequencies method from library
-	// freqMap, _, _, maxIndex := Frequencies[int](heights)
+	// freqMap, _, _, maxIndex := Frequencies(heights)
 	// maxVal := heights[maxIndex]
 
 	result := freqMap[maxVal]
@@ -30,7 +30,8 @@ func solution(lines []string, writer *bufio.Writer) {
 }
 
 func main() {
-	RunWithFile(solution, "birthday_cake_candles/testcases/001-in.txt") //RunWithString(solution, "4\n3 2 1 3")
+	RunWithFile(solution, "birthday_cake_candles/testcases/001-in.txt")
+	//RunWithString(solution, "4\n3 2 1 3")
 }
 
 // https://www.hackerrank.com/challenges/birthday-cake-candles/problem
