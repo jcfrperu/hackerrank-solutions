@@ -7,34 +7,30 @@ import (
 	"math/big"
 )
 
-// Complete the extraLongFactorials function below.
-func extraLongFactorials(n int64) {
+func solution(lines []string, writer *bufio.Writer) {
+	n := ParseLong(lines[0])
+
 	// n must be >= 1
-	var fact = big.NewInt(int64(1))
+	var factorial = big.NewInt(int64(1))
 
 	if n == 1 {
-		fact = big.NewInt(n)
+		factorial = big.NewInt(n)
 	} else {
 		i := int64(1)
 		for i <= n {
-			//fact *= i
-			fact = fact.Mul(fact, big.NewInt(i))
+			//factorial *= i
+			factorial = factorial.Mul(factorial, big.NewInt(i))
 			i++
 		}
 	}
 
-	fmt.Printf("%d", fact)
-}
-
-func solution(lines []string, writer *bufio.Writer) {
-
-	Out(writer, fmt.Sprintf("%d", 4))
+	fmt.Fprintf(writer, "%d", factorial)
 }
 
 func main() {
-	//RunWithFile(solution, "PROBLEM/testcases/001.input")
-	RunWithString(solution, "1\n2 3")
+	//RunWithFile(solution, "extra_long_factorials/testcases/001-in.txt")
+	RunWithString(solution, "25")
 }
 
-// https://www.hackerrank.com/challenges/URL_PROBLEM/problem
+// https://www.hackerrank.com/challenges/extra-long-factorials/problem
 // NOTE: read 'template-submit-code.go' file to submit your code to hackerrank.com
