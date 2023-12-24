@@ -124,6 +124,21 @@ func SplitLongs(line string, separator string) []int64 {
 	return list
 }
 
+func SplitGetAt(line string, separator string, index int) string {
+	split := Split(line, separator)
+	return split[index]
+}
+
+func SplitGetIntAt(line string, separator string, index int) int {
+	split := Split(line, separator)
+	return ParseInt(split[index])
+}
+
+func SplitGetLongAt(line string, separator string, index int) int64 {
+	split := Split(line, separator)
+	return ParseLong(split[index])
+}
+
 func Frequencies(list []string, sortKeysByFreq bool) (map[string]int, []string) {
 	// creating map of frequencies
 	freqMap := make(map[string]int, len(list))
