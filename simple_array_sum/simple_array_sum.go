@@ -23,7 +23,7 @@ func Print2(w io.Writer, format string, a any) {
 }
 
 func main() {
-	//RunWithFile(solution, "simple_array_sum/testcases/001.input")
+	//RunWithFile(solution, "simple_array_sum/testcases/001-in.txt")
 	RunWithString(solution, "6\n1 2 3 4 10 11")
 }
 

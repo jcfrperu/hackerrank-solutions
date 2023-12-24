@@ -7,7 +7,7 @@ import (
 )
 
 func solution(lines []string, writer *bufio.Writer) {
-	var list = SplitLongs(lines[1], " ")
+	list := SplitLongs(lines[1], " ")
 
 	sum := int64(0)
 	for i := 0; i < len(list); i++ {
@@ -18,7 +18,7 @@ func solution(lines []string, writer *bufio.Writer) {
 }
 
 func main() {
-	//RunWithFile(solution, "a_very_big_sum/testcases/001.input")
+	//RunWithFile(solution, "a_very_big_sum/testcases/001-in.txt")
 	RunWithString(solution, "5\n1000000001 1000000002 1000000003 1000000004 1000000005")
 }
 
