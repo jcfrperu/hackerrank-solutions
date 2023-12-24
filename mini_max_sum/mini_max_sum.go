@@ -7,29 +7,25 @@ import (
 	"sort"
 )
 
-// Complete the miniMaxSum function below.
-func miniMaxSum(arr []int) {
-
+func solution(lines []string, writer *bufio.Writer) {
+	arr := SplitInts(lines[0], " ")
 	sort.Ints(arr)
 
-	var sum int64 = 0
-
+	sum := int64(0)
 	for _, item := range arr {
 		sum += int64(item)
 	}
 
-	fmt.Printf("%d %d", sum-int64(arr[len(arr)-1]), sum-int64(arr[0]))
-}
+	sol01 := sum - int64(arr[len(arr)-1])
+	sol02 := sum - int64(arr[0])
 
-func solution(lines []string, writer *bufio.Writer) {
-
-	Out(writer, fmt.Sprintf("%d", 4))
+	fmt.Fprintf(writer, "%d %d", sol01, sol02)
 }
 
 func main() {
-	//RunWithFile(solution, "PROBLEM/testcases/001.input")
-	RunWithString(solution, "1\n2 3")
+	//RunWithFile(solution, "mini_max_sum/testcases/001-in.txt")
+	RunWithString(solution, "1 2 3 4 5")
 }
 
-// https://www.hackerrank.com/challenges/URL_PROBLEM/problem
+// https://www.hackerrank.com/challenges/mini-max-sum/problem
 // NOTE: read 'template-submit-code.go' file to submit your code to hackerrank.com
