@@ -7,37 +7,32 @@ import (
 	"math"
 )
 
-func diagonalDifference(arr [][]int32) int32 {
-	// Write your code here
+func solution(lines []string, writer *bufio.Writer) {
+	arr := make([][]int, 0)
+	for _, line := range lines[1:] {
+		arr = append(arr, SplitInts(line, " "))
+	}
 
-	var diag01 int32 = 0
-	var diag02 int32 = 0
-
+	diag01, diag02 := 0, 0
 	for i, row := range arr {
-		for j, _ := range row {
-
+		for j := range row {
 			if i == j {
 				diag01 += arr[i][j]
 			}
-
 			if j == len(arr)-i-1 {
-				//fmt.Printf(" i=%d j=%d v=%d \n", i, j, arr[i][j])
 				diag02 += arr[i][j]
 			}
 		}
 	}
-	return int32(math.Abs(float64(diag01 - diag02)))
-}
 
-func solution(lines []string, writer *bufio.Writer) {
-
-	Out(writer, fmt.Sprintf("%d", 4))
+	absValue := int(math.Abs(float64(diag01 - diag02)))
+	fmt.Fprintf(writer, "%d", absValue)
 }
 
 func main() {
-	//RunWithFile(solution, "PROBLEM/testcases/001.input")
-	RunWithString(solution, "1\n2 3")
+	RunWithFile(solution, "diagonal_difference/testcases/001-in.txt")
+	//RunWithString(solution, "3\n11 2 4\n4 5 6\n10 8 -12")
 }
 
-// https://www.hackerrank.com/challenges/URL_PROBLEM/problem
+// https://www.hackerrank.com/challenges/diagonal-difference/problem
 // NOTE: read 'template-submit-code.go' file to submit your code to hackerrank.com
