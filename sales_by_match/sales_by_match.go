@@ -8,7 +8,14 @@ import (
 
 func solution(lines []string, writer *bufio.Writer) {
 	var list = SplitInts(lines[1], " ")
-	var _, freqMap = FrequenciesInt(list)
+
+	freqMap, _, _, _ := Frequencies(list)
+
+	// or
+	//freqMap := make(map[int]int, len(list))
+	//for i := range list {
+	//	freqMap[list[i]]++
+	//}
 
 	var pairs = 0
 	for _, value := range freqMap {
@@ -19,13 +26,13 @@ func solution(lines []string, writer *bufio.Writer) {
 		}
 	}
 
-	Out(writer, fmt.Sprintf("%d", pairs))
+	fmt.Fprintf(writer, "%d", pairs)
 }
 
 func main() {
-	//RunWithFile(solution, "PROBLEM/testcases/001.input")
-	RunWithString(solution, "1\n2 3")
+	RunWithFile(solution, "sales_by_match/testcases/001-in.txt")
+	//RunWithString(solution, "9\n10 20 20 10 10 30 50 10 20")
 }
 
-// https://www.hackerrank.com/challenges/URL_PROBLEM/problem
+// https://www.hackerrank.com/challenges/sock-merchant/problem
 // NOTE: read 'template-submit-code.go' file to submit your code to hackerrank.com
