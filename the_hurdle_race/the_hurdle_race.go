@@ -7,25 +7,24 @@ import (
 )
 
 func solution(lines []string, writer *bufio.Writer) {
-	k := SplitIntsGetAt(lines[0], " ", 1)
+	k := SplitGetIntAt(lines[0], " ", 1)
 	heights := SplitInts(lines[1], " ")
 
-	max := heights[0]
+	maxHeight := heights[0]
 	for _, height := range heights {
-		if height > max {
-			max = height
+		if height > maxHeight {
+			maxHeight = height
 		}
 	}
 
-	result := ExecInt("max", 0, max-k)
-
-	Out(writer, fmt.Sprintf("%d", result))
+	result := max(0, maxHeight-k)
+	fmt.Fprintf(writer, "%d", result)
 }
 
 func main() {
-	//RunWithFile(solution, "PROBLEM/testcases/001.input")
-	RunWithString(solution, "1\n2 3")
+	RunWithFile(solution, "the_hurdle_race/testcases/001-in.txt")
+	//RunWithString(solution, "5 4\n1 6 3 5 2")
 }
 
-// https://www.hackerrank.com/challenges/URL_PROBLEM/problem
+// https://www.hackerrank.com/challenges/the-hurdle-race/problem
 // NOTE: read 'template-submit-code.go' file to submit your code to hackerrank.com
