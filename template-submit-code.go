@@ -37,6 +37,10 @@ func RunHackerRank(funcToRun func([]string, *bufio.Writer)) {
 	run(funcToRun, os.Stdin, os.Getenv("OUTPUT_PATH")) // config for hackerrank.com
 }
 
+func RunWithString(funcToRun func([]string, *bufio.Writer), stringInput string) {
+	run(funcToRun, strings.NewReader(stringInput), "")
+}
+
 func run(solutionFunc func([]string, *bufio.Writer), inputReader io.Reader, outFilePath string) {
 	getWriter := func(filePath string) (*os.File, *bufio.Writer) {
 		if len(filePath) > 0 {
