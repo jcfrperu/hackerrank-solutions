@@ -6,9 +6,6 @@ import (
 	. "github.com/jcfrperu/go-competitive-programming"
 )
 
-/* ****************************************************************** */
-/* **************************   SOLUTION   ************************** */
-/* ****************************************************************** */
 func solution(lines []string, writer *bufio.Writer) {
 	k := SplitGetIntAt(lines[0], " ", 1)
 	bill := SplitInts(lines[1], " ")
